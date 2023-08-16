@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories } from '../actions';
 
 const ListCategoriesComponent = (props) => {
   useEffect(()=>{
@@ -15,9 +17,26 @@ const ListCategoriesComponent = (props) => {
   }
   return (
     <div className='container'>
-       {
-        JSON.stringify(props.categories)
-       }  
+        <table className='table table-bordered table-striped'>
+            <thead className='table-dark'>
+                <tr>
+                    <th>Category Id</th>
+                    <th>Category Name</th>
+                    <th>Base Price</th>
+                </tr>
+            </thead>
+            <tbody className='table-warning'>
+                {
+                    props.categories.map((cat,index)=>(
+                        <tr key={index}>
+                            <td>{cat.CategoryId}</td>
+                            <td>{cat.CategoryName}</td>
+                            <td>{cat.BasePrice}</td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
     </div>
   )
 }

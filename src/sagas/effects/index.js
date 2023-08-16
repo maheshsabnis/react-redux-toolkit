@@ -58,12 +58,12 @@ function* inputActionGetCategories() {
 // so that it can be passed to the postDepartment method
 function* outputActionAddCategory(action) {
     try {
-        console.log(`Received data from UI is = ${JSON.stringify(JSON.stringify(action.payload))}`);
+        // console.log(`Received data from UI is = ${JSON.stringify(JSON.stringify(action.payload))}`);
         // call the promise based method
         const response = yield call(postCategory, action.payload);
         //console.log(`The resolved response in SAGA is ${JSON.stringify(response)}`);
         // Lets dispatch the success  output action
-        yield put(addCategorySuccess(response.data));
+        yield put(addCategorySuccess(response));
       } catch (ex) {
         // Lets dispatch the failed  output action
         yield put({

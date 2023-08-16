@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch,useSelector,shallowEqual } from 'react-redux';
 
 import AddCategoryComponent from './addcategorycomponent';
 import ListCategoriesComponent from './listcategoriescomponent';
@@ -8,9 +8,9 @@ import { getCategories } from '../actions';
 
 const MainReduxSagaComponent = () => {
 
-    const categoriesRecords = useSelector(state=>state);
+    const categoriesRecords = useSelector(state=>state.categories, shallowEqual);
 
-    console.log(`in Main ${JSON.stringify(categoriesRecords)}`);
+
 
     const dispatch = useDispatch();
 
@@ -19,15 +19,16 @@ const MainReduxSagaComponent = () => {
         (state) => dispatch(getCategories('Call Initiated')),
         [dispatch]
       );
-
+     
   return (
     <div className='container'>
         <AddCategoryComponent></AddCategoryComponent>
         <hr/>
-        <ListCategoriesComponent
+       
+       { <ListCategoriesComponent
           categories={categoriesRecords}
           getData={getCategrories}
-        ></ListCategoriesComponent>
+        ></ListCategoriesComponent>}
     </div>
   )
 }

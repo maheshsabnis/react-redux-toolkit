@@ -1,1 +1,1 @@
-export const initialState = {categories:[]};
+export const initialState = {categories:[], category:{}};
